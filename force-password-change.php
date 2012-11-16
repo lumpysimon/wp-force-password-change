@@ -67,11 +67,11 @@ class forcePasswordChange {
 	// just a bunch of functions called from various hooks
 	function __construct() {
 
-		add_action( 'user_register',     array( $this, 'registered' ) );
-		add_action( 'profile_update',    array( $this, 'updated' ), 10, 2 );
-		add_action( 'template_redirect', array( $this, 'redirect' ) );
-		add_action( 'current_screen',    array( $this, 'redirect' ) );
-		add_action( 'admin_notices',     array( $this, 'notice' ) );
+		add_action( 'user_register',           array( $this, 'registered' ) );
+		add_action( 'personal_options_update', array( $this, 'updated' ) );
+		add_action( 'template_redirect',       array( $this, 'redirect' ) );
+		add_action( 'current_screen',          array( $this, 'redirect' ) );
+		add_action( 'admin_notices',           array( $this, 'notice' ) );
 
 	}
 
@@ -87,13 +87,30 @@ class forcePasswordChange {
 
 
 	// delete the user meta field when a user changes their password
-	function updated( $user_id, $old_data ) {
+	function updated( $user_id ) {
 
 		$user_data = get_userdata( $user_id );
 
-		if ( $user_data->user_pass != $old_data->user_pass ) {
-			delete_user_meta( $user_id, 'force-password-change' );
-		}
+		$pass1 = $pass2 = '';
+
+		if ( isset( $_POST['pass1'] ) )
+			$pass1 = $_POST['pass1'];
+
+		if ( isset( $_POST['pass2'] ) )
+			$pass2 = $_POST['pass2'];
+
+		if (
+			$pass1 != $pass2
+			or
+			empty( $pass1 )
+			or
+			empty( $pass2 )
+			or
+			false !== strpos( stripslashes( $pass1 ), "\\" )
+			)
+			return;
+
+		delete_user_meta( $user_id, 'force-password-change' );
 
 	}
 
