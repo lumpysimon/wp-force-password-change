@@ -4,7 +4,7 @@ Plugin Name: Force Password Change
 Plugin URI:  https://github.com/lumpysimon/wp-force-password-change
 Description: Require users to change their password on first login.
 Author:      Simon Blackbourn @ Lumpy Lemon
-Version:     0.1
+Version:     0.2
 Author URI:  https://twitter.com/lumpysimon
 
 
@@ -12,11 +12,11 @@ Author URI:  https://twitter.com/lumpysimon
 	About this plugin
 	-----------------
 
-	This plugin forces newly-registered users to change their password when they first log in.
-	Until they have done this, they will be redirected to the Admin -> Edit Profile page,
-	with a notice informing them to change their password.
+	This plugin redirects newly-registered users to the Admin -> Edit Profile page when they first log in.
+	Until they have changed their password, they will not be able to access either the front-end or other admin pages.
+	An admin notice is also displayed informing them that they must change their password.
 
-	As of version 0.1, this is a hastily knocked-up plugin in response to
+	As of version 0.2, this is a hastily knocked-up plugin in response to
 	an enquiry from a client and a question on WordPress Answers:
 	http://wordpress.stackexchange.com/questions/72788/wordpress-force-users-to-change-password-on-first-login
 
@@ -86,10 +86,8 @@ class forcePasswordChange {
 
 
 
-	// delete the user meta field when a user changes their password
+	// delete the user meta field when a user successfully changes their password
 	function updated( $user_id ) {
-
-		$user_data = get_userdata( $user_id );
 
 		$pass1 = $pass2 = '';
 
