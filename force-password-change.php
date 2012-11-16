@@ -1,11 +1,15 @@
 <?php
 /*
-Plugin Name: Force Password Change
-Plugin URI:  https://github.com/lumpysimon/wp-force-password-change
-Description: Require users to change their password on first login.
-Author:      Simon Blackbourn @ Lumpy Lemon
-Version:     0.2
-Author URI:  https://twitter.com/lumpysimon
+Plugin Name:  Force Password Change
+Description:  Require users to change their password on first login.
+Version:      0.3
+License:      GPL v2 or later
+Plugin URI:   https://github.com/lumpysimon/wp-force-password-change
+Author:       Simon Blackbourn @ Lumpy Lemon
+Author URI:   https://twitter.com/lumpysimon
+Author Email: simon@lumpylemon.co.uk
+Text Domain:  force_password_change
+Domain Path:  /languages/
 
 
 
@@ -20,16 +24,15 @@ Author URI:  https://twitter.com/lumpysimon
 	an enquiry from a client and a question on WordPress Answers:
 	http://wordpress.stackexchange.com/questions/72788/wordpress-force-users-to-change-password-on-first-login
 
-	There may well be bugs and it can almost certainly be improved.
+	Please report any bugs on the WordPress support forum: http://wordpress.org/support/plugin/force-password-change
 
 
 
 	About me
 	--------
 
-	I'm Simon Blackbourn, co-founder of Lumpy Lemon,
-	a small & friendly UK-based WordPress design & development company
-	specialising in custom-built WordPress CMS sites for about 7 years.
+	I'm Simon Blackbourn, co-founder of Lumpy Lemon, a small & friendly UK-based
+	WordPress design & development company specialising in custom-built WordPress CMS sites.
 	I work mainly, but not exclusively, with not-for-profit organisations.
 
 	Find me on Twitter, Skype & GitHub: lumpysimon
@@ -67,11 +70,25 @@ class forcePasswordChange {
 	// just a bunch of functions called from various hooks
 	function __construct() {
 
+		add_action( 'init',                    array( $this, 'init' ) );
 		add_action( 'user_register',           array( $this, 'registered' ) );
 		add_action( 'personal_options_update', array( $this, 'updated' ) );
 		add_action( 'template_redirect',       array( $this, 'redirect' ) );
 		add_action( 'current_screen',          array( $this, 'redirect' ) );
 		add_action( 'admin_notices',           array( $this, 'notice' ) );
+
+	}
+
+
+
+	// load localisation files
+	function init() {
+
+		load_plugin_textdomain(
+			'force_password_change',
+			false,
+			dirname( plugin_basename( __FILE__ ) ) . '/languages'
+			);
 
 	}
 
@@ -155,9 +172,11 @@ class forcePasswordChange {
 		wp_get_current_user();
 
 		if ( get_user_meta( $current_user->ID, 'force-password-change', true ) ) {
-			echo '<div class="error"><p>Please change your password in order to continue using this website</p></div>';
+			printf(
+				'<div class="error"><p>%s</p></div>',
+				__( 'Please change your password in order to continue using this website', 'force_password_change' )
+				);
 		}
-
 
 	}
 
