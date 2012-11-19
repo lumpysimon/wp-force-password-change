@@ -3,7 +3,7 @@ Contributors: lumpysimon
 Tags: password, passwords, user, users, registration, register, force, require, login, user control
 Requires at least: 3.2
 Tested up to: 3.5
-Stable tag: trunk
+Stable tag: 0.3
 License: GPL v2 or later
 
 Require users to change their password on first login.
