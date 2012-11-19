@@ -29,6 +29,9 @@ You can also download this plugin from GitHub at [https://github.com/lumpysimon/
 
 == Changelog ==
 
+= 0.3 =
+* Prepare for localisation
+
 = 0.2 =
 * Complete rewrite of the updated() function
 
