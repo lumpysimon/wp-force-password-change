@@ -133,9 +133,8 @@ class forcePasswordChange {
 
 	// if:
 	// - we're logged in,
-	// - we're not an admin user,
 	// - the user meta field is present,
-	// - we're on the front-end or any admin screen apart from the edit profile page,
+	// - we're on the front-end or any admin screen apart from the edit profile page or plugins page,
 	// then redirect to the edit profile page
 	function redirect() {
 
@@ -145,12 +144,11 @@ class forcePasswordChange {
 			$screen = get_current_screen();
 			if ( 'profile' == $screen->base )
 				return;
+			if ( 'plugins' == $screen->base )
+				return;
 		}
 
 		if ( ! is_user_logged_in() )
-			return;
-
-		if ( current_user_can( 'activate_plugins' ) )
 			return;
 
 		wp_get_current_user();
