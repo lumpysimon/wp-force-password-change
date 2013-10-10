@@ -151,7 +151,7 @@ class forcePasswordChange {
 		if ( ! is_user_logged_in() )
 			return;
 
-		wp_get_current_user();
+		$current_user = wp_get_current_user();
 
 		if ( get_user_meta( $current_user->ID, 'force-password-change', true ) ) {
 			wp_redirect( admin_url( 'profile.php' ) );
@@ -167,7 +167,7 @@ class forcePasswordChange {
 
 		global $current_user;
 
-		wp_get_current_user();
+		$current_user = wp_get_current_user();
 
 		if ( get_user_meta( $current_user->ID, 'force-password-change', true ) ) {
 			printf(
