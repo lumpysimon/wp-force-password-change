@@ -2,13 +2,13 @@
 /*
 Plugin Name:  Force Password Change
 Description:  Require users to change their password on first login.
-Version:      0.3
+Version:      0.4
 License:      GPL v2 or later
 Plugin URI:   https://github.com/lumpysimon/wp-force-password-change
-Author:       Simon Blackbourn @ Lumpy Lemon
+Author:       Simon Blackbourn
 Author URI:   https://twitter.com/lumpysimon
 Author Email: simon@lumpylemon.co.uk
-Text Domain:  force_password_change
+Text Domain:  force-password-change
 Domain Path:  /languages/
 
 
@@ -20,11 +20,9 @@ Domain Path:  /languages/
 	Until they have changed their password, they will not be able to access either the front-end or other admin pages.
 	An admin notice is also displayed informing them that they must change their password.
 
-	As of version 0.2, this is a hastily knocked-up plugin in response to
-	an enquiry from a client and a question on WordPress Answers:
-	http://wordpress.stackexchange.com/questions/72788/wordpress-force-users-to-change-password-on-first-login
-
 	Please report any bugs on the WordPress support forum: http://wordpress.org/support/plugin/force-password-change
+
+	Development takes place at https://github.com/lumpysimon/wp-force-password-change (all pull requests will be considered)
 
 
 
@@ -63,7 +61,11 @@ Domain Path:  /languages/
 
 
 
-class forcePasswordChange {
+$force_password_change = new force_password_change;
+
+
+
+class force_password_change {
 
 
 
@@ -85,7 +87,7 @@ class forcePasswordChange {
 	function init() {
 
 		load_plugin_textdomain(
-			'force_password_change',
+			'force-password-change',
 			false,
 			dirname( plugin_basename( __FILE__ ) ) . '/languages'
 			);
@@ -172,7 +174,7 @@ class forcePasswordChange {
 		if ( get_user_meta( $current_user->ID, 'force-password-change', true ) ) {
 			printf(
 				'<div class="error"><p>%s</p></div>',
-				__( 'Please change your password in order to continue using this website', 'force_password_change' )
+				__( 'Please change your password in order to continue using this website', 'force-password-change' )
 				);
 		}
 
@@ -180,12 +182,4 @@ class forcePasswordChange {
 
 
 
-}
-
-
-
-$force_password_change = new forcePasswordChange;
-
-
-
-?>
+} // class
