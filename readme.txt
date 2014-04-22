@@ -14,6 +14,29 @@ This plugin redirects newly-registered users to the *Admin -> Edit Profile* page
 
 New administrators must also change their password, but as a safety measure they can also access the *Admin -> Plugins* page.
 
+= Translations included =
+
+ * Català (Catalan)
+ * 中文 (Chinese)
+ * Nederlands (Dutch)
+ * Français (French)
+ * Deutsch (German)
+ * Ελληνικά (Greek)
+ * Magyar (Hungarian)
+ * Italiano (Italian)
+ * 日本語 (Japanese)
+ * 한국어 (Korean)
+ * македонски јазик (Macedonian)
+ * Polski (Polish)
+ * Português do Brasil (Brazilian Portuguese)
+ * Português (Portuguese)
+ * Română (Romanian)
+ * Русский (Russian)
+ * Español (Spanish)
+ * Türkçe (Turkish)
+
+New translations are very welcome - please submit them via [WP-Translations](http://wp-translations.org/). This plugin's WP-Translations page is [transifex.com/projects/p/force-password-change](https://www.transifex.com/projects/p/force-password-change/)
+
 == Installation ==
 
 To install directly from your WordPress dashboard:
@@ -30,6 +53,9 @@ Alternatively, see the official WordPress Codex guide to [Manually Installing Pl
 You can also download this plugin from GitHub at [https://github.com/lumpysimon/wp-force-password-change](https://github.com/lumpysimon/wp-force-password-change)
 
 == Changelog ==
+
+= 0.5 (22nd April 2014) =
+* Lots of translations, all submitted via the [WP-Translations project](http://wp-translations.org/): Catalan, Chinese, Dutch, French, German, Greek, Hungarian, Italian, Japanese, Korean, Macedonian, Polish, Portuguese (Brazil), Portuguese (Portugal), Romanian, Russian, Spanish and Turkish
 
 = 0.4 (7th April 2014) =
 * Also force administrators to change their password (thanks to [johnbillion](https://github.com/lumpysimon/wp-force-password-change/pull/1))
