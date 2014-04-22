@@ -1,0 +1,7 @@
+[main]
+host = https://www.transifex.com
+[force-password-change.force-password-change]
+file_filter = languages/force-password-change-<lang>.po
+source_file = languages/force-password-change.pot
+source_lang = en_US
+type = PO
