@@ -58,7 +58,7 @@ You can also download this plugin from GitHub at [https://github.com/lumpysimon/
 
 == Changelog ==
 
-= 0.6 (16th December 2014)
+= 0.6 (16th December 2014) =
 * Four new translations: Hebrew, Hindi, Khmer and Lithuanian
 * Tested in WordPress 4.1
 
