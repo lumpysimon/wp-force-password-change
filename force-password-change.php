@@ -2,7 +2,7 @@
 /*
 Plugin Name:  Force Password Change
 Description:  Require users to change their password on first login.
-Version:      0.5
+Version:      0.6
 License:      GPL v2 or later
 Plugin URI:   https://github.com/lumpysimon/wp-force-password-change
 Author:       Simon Blackbourn

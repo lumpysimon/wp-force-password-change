@@ -5,7 +5,7 @@ A WordPress plugin that requires users to change their password on first login.
  * **Contributors:** lumpysimon
  * **Tags:** password, passwords, user, users, registration, register, force, require, login, user control
  * **Requires at least:** 3.2
- * **Tested up to:** 3.9
+ * **Tested up to:** 4.1
  * **Stable tag:** trunk
  * **License:** GPL v2 or later
 
@@ -23,10 +23,14 @@ New administrators must also change their password, but as a safety measure they
  * Français (French)
  * Deutsch (German)
  * Ελληνικά (Greek)
+ * Hebrew
+ * Hindi
  * Magyar (Hungarian)
  * Italiano (Italian)
  * 日本語 (Japanese)
+ * Khmer
  * 한국어 (Korean)
+ * Lietuvių kalba (Lithuanian)
  * македонски јазик (Macedonian)
  * Polski (Polish)
  * Português do Brasil (Brazilian Portuguese)

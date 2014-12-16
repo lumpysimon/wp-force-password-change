@@ -2,7 +2,7 @@
 Contributors: lumpysimon
 Tags: password, passwords, user, users, registration, register, force, require, login, user control
 Requires at least: 3.2
-Tested up to: 3.9
+Tested up to: 4.1
 Stable tag: trunk
 License: GPL v2 or later
 
@@ -22,10 +22,14 @@ New administrators must also change their password, but as a safety measure they
  * Français (French)
  * Deutsch (German)
  * Ελληνικά (Greek)
+ * Hebrew
+ * Hindi
  * Magyar (Hungarian)
  * Italiano (Italian)
  * 日本語 (Japanese)
+ * Khmer
  * 한국어 (Korean)
+ * Lietuvių kalba (Lithuanian)
  * македонски јазик (Macedonian)
  * Polski (Polish)
  * Português do Brasil (Brazilian Portuguese)
@@ -53,6 +57,10 @@ Alternatively, see the official WordPress Codex guide to [Manually Installing Pl
 You can also download this plugin from GitHub at [https://github.com/lumpysimon/wp-force-password-change](https://github.com/lumpysimon/wp-force-password-change)
 
 == Changelog ==
+
+= 0.6 (16th December 2014)
+* Four new translations: Hebrew, Hindi, Khmer and Lithuanian
+* Tested in WordPress 4.1
 
 = 0.5 (22nd April 2014) =
 * Lots of translations, all submitted via the [WP-Translations project](http://wp-translations.org/): Catalan, Chinese, Dutch, French, German, Greek, Hungarian, Italian, Japanese, Korean, Macedonian, Polish, Portuguese (Brazil), Portuguese (Portugal), Romanian, Russian, Spanish and Turkish
