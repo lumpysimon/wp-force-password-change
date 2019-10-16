@@ -5,7 +5,7 @@ Description:  Require users to change their password on first login.
 Version:      0.6
 License:      GPL v2 or later
 Plugin URI:   https://github.com/lumpysimon/wp-force-password-change
-Author:       Simon Blackbourn
+Author:       Simon Blackbourn, Federico Maiorini
 Author URI:   https://twitter.com/lumpysimon
 Author Email: simon@lumpylemon.co.uk
 Text Domain:  force-password-change
@@ -62,27 +62,28 @@ Domain Path:  /languages/
 */
 
 
-
 $force_password_change = new force_password_change;
-
 
 
 class force_password_change {
 
 
-
 	// just a bunch of functions called from various hooks
 	function __construct() {
 
-		add_action( 'init',                    array( $this, 'init' ) );
-		add_action( 'user_register',           array( $this, 'registered' ) );
+		add_action( 'init', array( $this, 'init' ) );
+		add_action( 'user_register', array( $this, 'registered' ) );
 		add_action( 'personal_options_update', array( $this, 'updated' ) );
-		add_action( 'template_redirect',       array( $this, 'redirect' ) );
-		add_action( 'current_screen',          array( $this, 'redirect' ) );
-		add_action( 'admin_notices',           array( $this, 'notice' ) );
+		add_action( 'template_redirect', array( $this, 'redirect' ) );
+		add_action( 'current_screen', array( $this, 'redirect' ) );
+		add_action( 'admin_notices', array( $this, 'notice' ) );
+
+		add_action( 'show_user_profile', [ $this, 'extra_user_profile_fields' ] );
+		add_action( 'edit_user_profile', [ $this, 'extra_user_profile_fields' ] );
+		add_action( 'personal_options_update', [ $this, 'save_extra_user_profile_fields' ] );
+		add_action( 'edit_user_profile_update', [ $this, 'save_extra_user_profile_fields' ] );
 
 	}
-
 
 
 	// load localisation files
@@ -92,10 +93,9 @@ class force_password_change {
 			'force-password-change',
 			false,
 			dirname( plugin_basename( __FILE__ ) ) . '/languages'
-			);
+		);
 
 	}
-
 
 
 	// add a user meta field when a new user is registered
@@ -106,17 +106,18 @@ class force_password_change {
 	}
 
 
-
 	// delete the user meta field when a user successfully changes their password
 	function updated( $user_id ) {
 
 		$pass1 = $pass2 = '';
 
-		if ( isset( $_POST['pass1'] ) )
+		if ( isset( $_POST['pass1'] ) ) {
 			$pass1 = $_POST['pass1'];
+		}
 
-		if ( isset( $_POST['pass2'] ) )
+		if ( isset( $_POST['pass2'] ) ) {
 			$pass2 = $_POST['pass2'];
+		}
 
 		if (
 			$pass1 != $pass2
@@ -126,8 +127,9 @@ class force_password_change {
 			empty( $pass2 )
 			or
 			false !== strpos( stripslashes( $pass1 ), "\\" )
-			)
+		) {
 			return;
+		}
 
 		delete_user_meta( $user_id, 'force-password-change' );
 
@@ -146,14 +148,17 @@ class force_password_change {
 
 		if ( is_admin() ) {
 			$screen = get_current_screen();
-			if ( 'profile' == $screen->base )
+			if ( 'profile' == $screen->base ) {
 				return;
-			if ( 'plugins' == $screen->base )
+			}
+			if ( 'plugins' == $screen->base ) {
 				return;
+			}
 		}
 
-		if ( ! is_user_logged_in() )
+		if ( ! is_user_logged_in() ) {
 			return;
+		}
 
 		wp_get_current_user();
 
@@ -163,7 +168,6 @@ class force_password_change {
 		}
 
 	}
-
 
 
 	// if the user meta field is present, display an admin notice
@@ -177,11 +181,37 @@ class force_password_change {
 			printf(
 				'<div class="error"><p>%s</p></div>',
 				__( 'Please change your password in order to continue using this website', 'force-password-change' )
-				);
+			);
 		}
 
 	}
 
 
+//show force-password-change in user profile
+
+	function extra_user_profile_fields( $user ) { ?>
+      <h3><?php _e( "Extra profile information", "blank" ); ?></h3>
+
+      <table class="form-table">
+        <tr>
+          <th><label for="force-password-change"><?php _e( "Forza cambio password" ); ?></label></th>
+          <td>
+            <input type="checkbox"
+                   name="force-password-change" id="force-password-change"
+                   value="true"
+			  <?php
+			  echo( get_user_meta( $user->ID, 'force-password-change', true ) == true ? 'checked="checked"' : '' );
+			  ?>
+          </td>
+        </tr>
+      </table>
+	<?php }
+
+	function save_extra_user_profile_fields( $user_id ) {
+		if ( ! current_user_can( 'edit_user', $user_id ) ) {
+			return false;
+		}
+		update_user_meta( $user_id, 'force-password-change', $_POST['force-password-change'] );
+	}
 
 } // class
