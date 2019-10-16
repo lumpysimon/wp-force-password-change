@@ -189,23 +189,27 @@ class force_password_change {
 
 //show force-password-change in user profile
 
-	function extra_user_profile_fields( $user ) { ?>
-      <h3><?php _e( "Extra profile information", "blank" ); ?></h3>
+	function extra_user_profile_fields( $user ) {
+		if ( get_current_user_id() != $user->ID ) {
+			?>
+          <h3><?php _e( "Extra profile information", "blank" ); ?></h3>
 
-      <table class="form-table">
-        <tr>
-          <th><label for="force-password-change"><?php _e( "Forza cambio password" ); ?></label></th>
-          <td>
-            <input type="checkbox"
-                   name="force-password-change" id="force-password-change"
-                   value="true"
-			  <?php
-			  echo( get_user_meta( $user->ID, 'force-password-change', true ) == true ? 'checked="checked"' : '' );
-			  ?>
-          </td>
-        </tr>
-      </table>
-	<?php }
+          <table class="form-table">
+            <tr>
+              <th><label for="force-password-change"><?php _e( "Forza cambio password" ); ?></label></th>
+              <td>
+                <input type="checkbox"
+                       name="force-password-change" id="force-password-change"
+                       value="true"
+				  <?php
+				  echo( get_user_meta( $user->ID, 'force-password-change', true ) == true ? 'checked="checked"' : '' );
+				  ?>
+              </td>
+            </tr>
+          </table>
+			<?php
+		}
+	}
 
 	function save_extra_user_profile_fields( $user_id ) {
 		if ( ! current_user_can( 'edit_user', $user_id ) ) {
