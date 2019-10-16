@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name:  Force Password Change
+Plugin Name:  Force Password Change [with force change]
 Description:  Require users to change their password on first login.
 Version:      0.6
 License:      GPL v2 or later
@@ -192,11 +192,11 @@ class force_password_change {
 	function extra_user_profile_fields( $user ) {
 		if ( get_current_user_id() != $user->ID ) {
 			?>
-          <h3><?php _e( "Extra profile information", "blank" ); ?></h3>
+          <h3><?php _e( "Force password change", "blank" ); ?></h3>
 
           <table class="form-table">
             <tr>
-              <th><label for="force-password-change"><?php _e( "Forza cambio password" ); ?></label></th>
+              <th><label for="force-password-change"><?php _e( "Force password change" ); ?></label></th>
               <td>
                 <input type="checkbox"
                        name="force-password-change" id="force-password-change"
