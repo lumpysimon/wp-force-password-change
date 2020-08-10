@@ -77,7 +77,7 @@ class force_password_change {
 		add_action( 'init',                    array( $this, 'init' ) );
 		add_action( 'user_register',           array( $this, 'registered' ) );
 		add_action( 'personal_options_update', array( $this, 'updated' ) );
-		add_action( 'template_redirect',       array( $this, 'redirect' ) );
+		add_action( 'template_redirect',       array( $this, 'redirect' ), 1 );
 		add_action( 'current_screen',          array( $this, 'redirect' ) );
 		add_action( 'admin_notices',           array( $this, 'notice' ) );
 
