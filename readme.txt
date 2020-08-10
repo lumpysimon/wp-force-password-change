@@ -2,7 +2,7 @@
 Contributors: lumpysimon
 Tags: password, passwords, user, users, registration, register, force, require, login, user control
 Requires at least: 3.2
-Tested up to: 4.1
+Tested up to: 5.5
 Stable tag: trunk
 License: GPL v2 or later
 
